@@ -6,7 +6,10 @@ export default class Nfts extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
+      table.integer('token_id').unsigned().references('id').inTable('tokens');
 
+      table.string('link', 255).notNullable();
+      table.json('configs').notNullable();
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

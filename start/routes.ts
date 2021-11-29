@@ -21,3 +21,4 @@
 import Route from '@ioc:Adonis/Core/Route';
 
 Route.get('/tokens', 'TokensController.index');
+Route.post('/tokens', 'TokensController.store');

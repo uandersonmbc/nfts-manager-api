@@ -1,14 +1,14 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
-export default class Nfts extends BaseSchema {
-  protected tableName = 'nfts';
+export default class TokensNfts extends BaseSchema {
+  protected tableName = 'tokens_nfts';
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
+      table.integer('token_id').unsigned().references('id').inTable('tokens');
+      table.integer('nft_id').unsigned().references('id').inTable('nfts');
 
-      table.string('link', 255).notNullable();
-      table.json('configs').notNullable();
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

@@ -5,6 +5,18 @@ export default class Token extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
+  @column()
+  public token: string;
+
+  @column()
+  public name: string;
+
+  @column()
+  public symbol: string;
+
+  @column()
+  public alternative_symbol: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

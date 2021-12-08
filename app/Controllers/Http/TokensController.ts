@@ -1,11 +1,29 @@
-import { Response } from '@adonisjs/http-server/build/standalone';
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Token from 'App/Models/Token';
 
 export default class TokensController {
   public async index({ request, response }: HttpContextContract) {
-    const tokens = await Token.all();
-    return response.json(tokens);
+    const { search } = request.qs();
+    try {
+      if (search) {
+        return response.json(await this.search({ search }));
+      }
+
+      const tokens = await Token.all();
+
+      return response.json(tokens);
+    } catch (error) {
+      return response.json({ error: error.message });
+    }
+  }
+
+  public async search({ search }) {
+    const token = await Token.query()
+      .where('symbol', 'ILIKE', `%${search}%`)
+      .orWhere('alternative_symbol', 'ILIKE', `%${search}%`)
+      .orWhere('name', 'ILIKE', `%${search}%`);
+
+    return token;
   }
 
   public async store({ request, response }: HttpContextContract) {

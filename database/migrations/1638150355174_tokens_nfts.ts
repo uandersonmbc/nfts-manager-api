@@ -5,7 +5,6 @@ export default class TokensNfts extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id');
       table.integer('token_id').unsigned().references('id').inTable('tokens');
       table.integer('nft_id').unsigned().references('id').inTable('nfts');
 

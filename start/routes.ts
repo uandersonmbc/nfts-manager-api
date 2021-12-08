@@ -20,5 +20,19 @@
 
 import Route from '@ioc:Adonis/Core/Route';
 
+Route.post('/users', 'UsersController.store');
+Route.post('/login', 'UsersController.login');
+
 Route.get('/tokens', 'TokensController.index');
-Route.post('/tokens', 'TokensController.store');
+
+Route.group(() => {
+  Route.resource('/investments', 'InvestmentsController').apiOnly();
+
+  Route.post('/logout', 'UsersController.logout');
+  Route.get('/users', 'UsersController');
+
+  Route.post('/tokens', 'TokensController.store');
+
+  // nfts
+  Route.resource('/nfts', 'NftsController').apiOnly();
+}).middleware('auth');

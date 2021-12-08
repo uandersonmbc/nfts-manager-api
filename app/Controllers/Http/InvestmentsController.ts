@@ -6,7 +6,7 @@ export default class InvestmentsController {
     return response.json(user);
   }
 
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ response }: HttpContextContract) {
     return response.json({});
   }
 }

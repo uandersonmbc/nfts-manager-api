@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Nft from 'App/Models/Nft';
 
 export default class NftsController {
-  public async index({ response, auth }: HttpContextContract) {
+  public async index({ response }: HttpContextContract) {
     const nfts = await Nft.query().preload('tokens');
     return response.json(nfts);
   }

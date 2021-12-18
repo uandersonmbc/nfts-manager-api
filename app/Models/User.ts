@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, beforeSave, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm';
+
 import Hash from '@ioc:Adonis/Core/Hash';
+import UserRole from './UserRole';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -27,4 +29,7 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password);
     }
   }
+
+  @hasOne(() => UserRole)
+  public role: HasOne<typeof UserRole>;
 }

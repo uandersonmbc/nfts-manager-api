@@ -42,13 +42,16 @@ export default class UsersController {
     const loginSchema = schema.create({
       email: schema.string({ trim: true }, [rules.email(), rules.required()]),
       password: schema.string({ trim: true }, [rules.required()]),
+      app: schema.string({ trim: true }, [rules.required()]),
+      keep_me: schema.boolean(),
     });
 
     try {
-      const { email, password } = await request.validate({ schema: loginSchema });
+      const { email, password, app, keep_me } = await request.validate({ schema: loginSchema });
       const token = await auth.use('api').attempt(email, password, {
-        name: 'api',
-        expiresIn: '1h',
+        name: app,
+        info: { ...request.headers(), remote_ip: request.ip() },
+        expiresIn: keep_me ? undefined : '1d',
       });
       return token;
     } catch (e) {

@@ -9,6 +9,7 @@ export default class ApiTokens extends BaseSchema {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'));
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.string('name').notNullable();
+      table.json('info').nullable();
       table.string('type').notNullable();
       table.string('token', 64).notNullable().unique();
 

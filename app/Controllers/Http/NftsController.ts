@@ -22,6 +22,8 @@ export default class NftsController {
 
   public async store({ request, response }: HttpContextContract) {
     const data = request.only(['link', 'configs', 'tokens']);
+
+    // return response.json(data);
     const nft = await Nft.create(data);
 
     await nft.related('tokens').attach(data.tokens);

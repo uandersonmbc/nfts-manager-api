@@ -7,6 +7,12 @@ export default class Nft extends BaseModel {
   public id: number;
 
   @column()
+  public name: string;
+
+  @column()
+  public slug: string;
+
+  @column()
   public link: string;
 
   @column()

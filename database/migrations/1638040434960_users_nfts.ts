@@ -6,10 +6,13 @@ export default class UsersNfts extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
+      table.string('name').notNullable();
+      table.string('account_address').nullable();
+
       table.integer('user_id').unsigned().references('id').inTable('users');
       table.integer('nft_id').unsigned().references('id').inTable('nfts');
 
-      table.json('data').notNullable();
+      table.json('data').nullable();
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

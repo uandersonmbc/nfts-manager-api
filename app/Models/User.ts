@@ -1,8 +1,17 @@
 import { DateTime } from 'luxon';
-import { BaseModel, beforeSave, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm';
+import {
+  BaseModel,
+  beforeSave,
+  column,
+  HasMany,
+  hasMany,
+  hasOne,
+  HasOne,
+} from '@ioc:Adonis/Lucid/Orm';
 
 import Hash from '@ioc:Adonis/Core/Hash';
 import UserRole from './UserRole';
+import UserNft from './UserNft';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -32,4 +41,7 @@ export default class User extends BaseModel {
 
   @hasOne(() => UserRole)
   public role: HasOne<typeof UserRole>;
+
+  @hasMany(() => UserNft)
+  public nfts: HasMany<typeof UserNft>;
 }

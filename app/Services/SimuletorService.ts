@@ -1,5 +1,5 @@
 export class SimuletorService {
-  public static async getSimulatorData() {
-    return null;
+  public static async bombCrypto() {
+    return {};
   }
 }

@@ -34,4 +34,8 @@ Route.group(() => {
 
   // nfts
   Route.resource('/nfts', 'NftsController').apiOnly();
+
+  // nft users
+  Route.post('/user-nft', 'NftUsersController.store');
+  Route.get('/user-nft', 'NftUsersController.index');
 }).middleware(['auth', 'role:admin']);

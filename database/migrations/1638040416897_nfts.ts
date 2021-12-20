@@ -7,6 +7,8 @@ export default class Nfts extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
 
+      table.string('name').notNullable();
+      table.string('slug').notNullable();
       table.string('link', 255).notNullable();
       table.json('configs').notNullable();
       /**

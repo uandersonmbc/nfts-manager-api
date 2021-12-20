@@ -9,7 +9,7 @@ export default class NftsController {
 
   public async update({ params, request, response }: HttpContextContract) {
     const nft = await Nft.findOrFail(params.id);
-    const data = request.only(['link', 'configs', 'tokens']);
+    const data = request.only(['name', 'slug', 'link', 'configs', 'tokens']);
     nft.merge(data);
 
     await nft.save();
@@ -21,7 +21,7 @@ export default class NftsController {
   }
 
   public async store({ request, response }: HttpContextContract) {
-    const data = request.only(['link', 'configs', 'tokens']);
+    const data = request.only(['name', 'slug', 'link', 'configs', 'tokens']);
 
     // return response.json(data);
     const nft = await Nft.create(data);

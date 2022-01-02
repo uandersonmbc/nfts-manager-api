@@ -11,6 +11,7 @@ export default class UsersNfts extends BaseSchema {
 
       table.integer('user_id').unsigned().references('id').inTable('users');
       table.integer('nft_id').unsigned().references('id').inTable('nfts');
+      table.uuid('wallet_id').references('id').inTable('wallets');
 
       table.json('data').nullable();
 

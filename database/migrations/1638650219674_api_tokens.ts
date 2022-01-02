@@ -4,7 +4,6 @@ export default class ApiTokens extends BaseSchema {
   protected tableName = 'api_tokens';
 
   public async up() {
-    this.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'));
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
